@@ -8,7 +8,7 @@
 void getInfo(char *vehType, int *hrTimeIn, int *minTimeIn, int *hrTimeOut, int *minTimeOut);
 void calcParkingTime(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int *hoursParked, int *minutesParked, int *parkedTime);
 float calcParkingFare(char vehType, int parkedTime);
-void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int hoursParked, int minutesParked, float fare, int parkedTime);
+void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int hoursParked, int minutesParked, float fare);
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
   fare = calcParkingFare(vehType, parkedTime);
 
   // output
-  printCharge(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, hoursParked, minutesParked, fare, parkedTime);
+  printCharge(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, hoursParked, minutesParked, fare);
 
   return 0;
 }
@@ -115,7 +115,7 @@ float calcParkingFare(char vehType, int parkedTime)
   return fare;
 }
 
-void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int hoursParked, int minutesParked, float fare, int parkedTime)
+void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int hoursParked, int minutesParked, float fare)
 {
   printf("\t\tPARKING LOT CHARGE\t\t\n");
   printf("\nType of vehicle: %c", vehType);
@@ -123,7 +123,7 @@ void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int m
   printf("\nTIME-out:              %d : %d", hrTimeOut, minTimeOut);
   printf("\n                      --------");
   printf("\nPARKING TIME           %.2d:%.2d", hoursParked, minutesParked);
-  printf("\nROUNDED TOTAL            %d", parkedTime);
+  printf("\nROUNDED TOTAL            %d", hoursParked);
   printf("\n                      --------");
   printf("\nTOTAL CHARGE             $%.2f", fare);
   printf("\n");
