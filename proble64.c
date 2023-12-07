@@ -39,9 +39,9 @@ void calcRoots(int a, int b, int c)
     double d;
 
     if (a == 0 && b == 0)
-    {
+
         printf("There is no solution.\n");
-    }
+
     else if (a == 0)
     {
         root1 = (float)-c / b;
