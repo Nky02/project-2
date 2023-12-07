@@ -1,4 +1,4 @@
-/*THis program calculates the parking fare for the
+/* This program calculates the parking fare for the
     customers who park their cars in a parking lot
   Written by: Nicky Shane Estrada
   Date: November 25, 2023*/
@@ -12,20 +12,16 @@ void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int m
 
 int main()
 {
-  // local declaration
   int hrTimeIn, hrTimeOut, minTimeIn, minTimeOut, parkedTime, hoursParked, minutesParked;
   float fare;
   char vehType;
 
-  // input
   getInfo(&vehType, &hrTimeIn, &minTimeIn, &hrTimeOut, &minTimeOut);
 
-  // process
   calcParkingTime(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, &hoursParked, &minutesParked, &parkedTime);
 
   fare = calcParkingFare(vehType, parkedTime);
 
-  // output
   printCharge(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, hoursParked, minutesParked, fare, parkedTime);
 
   return 0;
@@ -63,11 +59,8 @@ void calcParkingTime(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, i
     (*hoursParked)--;
   }
 
-  // Round up hours
   if (*minutesParked > 0)
-  {
     (*hoursParked)++;
-  }
 
   *parkedTime = *hoursParked;
 }
@@ -79,41 +72,29 @@ float calcParkingFare(char vehType, int parkedTime)
   switch (vehType)
   {
   case 'C':
-    if (parkedTime < 3) // 3 hours
-    {
+    if (parkedTime < 3)
       fare = 0.00;
-    }
     else
-    {
       fare = parkedTime * 1.50;
-    }
     break;
 
   case 'T':
-    if (parkedTime < 2) // 2 hours
-    {
+    if (parkedTime < 2)
       fare = 1.00;
-    }
     else
-    {
       fare = parkedTime * 2.30;
-    }
     break;
 
   case 'B':
-    if (parkedTime < 1) // 1 hour
-    {
+    if (parkedTime < 1)
       fare = 2.00;
-    }
     else
-    {
       fare = parkedTime * 3.70;
-    }
     break;
 
   default:
     printf("Invalid vehicle type.\n");
-    fare = 0.0; // for invalid INPUT
+    fare = 0.0;
   }
 
   return fare;
@@ -123,11 +104,11 @@ void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int m
 {
   printf("\t\tPARKING LOT CHARGE\t\t\n");
   printf("\nType of vehicle: %c", vehType);
-  printf("\nTIME-IN:               %d : %d", hrTimeIn, minTimeIn);
-  printf("\nTIME-out:              %d : %d", hrTimeOut, minTimeOut);
+  printf("\nTIME-IN:               %2d : %2d", hrTimeIn, minTimeIn);
+  printf("\nTIME-out:              %2d : %2d", hrTimeOut, minTimeOut);
   printf("\n                      --------");
-  printf("\nPARKING TIME           %.2d:%.2d", hoursParked, minutesParked);
-  printf("\nROUNDED TOTAL            %d", parkedTime);
+  printf("\nPARKING TIME             %.2d:%.2d", hoursParked, minutesParked);
+  printf("\nROUNDED TOTAL               %2d", parkedTime);
   printf("\n                      --------");
   printf("\nTOTAL CHARGE             $%.2f", fare);
   printf("\n");
