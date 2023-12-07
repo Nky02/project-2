@@ -5,21 +5,21 @@
 #include <stdio.h>
 
 // function declarations
-void getAngle(double *angle);
+void getAngle(int *angle);
 const char *validateAngle(int angle);
 
 int main()
 {
     // local declaration
-    double angle;
+    int angle;
     const char *quadrantNum;
 
     // function calls
     getAngle(&angle);
     quadrantNum = validateAngle(angle);
 
-    // output
-    if (quadrantNum != NULL)
+    // Output
+    if (quadrantNum[0] != 'I')
         printf("The given angle is in %s\n", quadrantNum);
     else
         printf("Invalid input\n");
@@ -27,11 +27,11 @@ int main()
     return 0;
 }
 
-void getAngle(double *angle)
+void getAngle(int *angle)
 {
     // user-input angle
     printf("Give an angle: ");
-    scanf("%lf", angle);
+    scanf("%d", angle);
 }
 
 const char *validateAngle(int givenAngle)
