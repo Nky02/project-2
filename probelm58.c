@@ -16,12 +16,15 @@ int main()
   float fare;
   char vehType;
 
+  //input
   getInfo(&vehType, &hrTimeIn, &minTimeIn, &hrTimeOut, &minTimeOut);
 
+  //process
   calcParkingTime(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, &hoursParked, &minutesParked, &parkedTime);
 
   fare = calcParkingFare(vehType, parkedTime);
 
+  //output
   printCharge(vehType, hrTimeIn, minTimeIn, hrTimeOut, minTimeOut, hoursParked, minutesParked, fare, parkedTime);
 
   return 0;
@@ -30,7 +33,7 @@ int main()
 void getInfo(char *vehType, int *hrTimeIn, int *minTimeIn, int *hrTimeOut, int *minTimeOut)
 {
   printf("To ensure a seamless parking experience, please provide the following details: \n\n");
-  printf("Type of Vehicle            (car(C), bus(B), truck(T))?: \n");
+  printf("Type of Vehicle            (C)ar, (B)us, (T)ruck?: \n");
   scanf(" %c", vehType);
   printf("Hour vehicle entered lot   (0-24)?\n");
   scanf("%d", hrTimeIn);
@@ -38,10 +41,11 @@ void getInfo(char *vehType, int *hrTimeIn, int *minTimeIn, int *hrTimeOut, int *
   scanf("%d", minTimeIn);
   printf("Hour vehicle left lot      (0-24)?\n");
   scanf("%d", hrTimeOut);
-  printf("Minute left entered lot    (0-60)?\n");
+  printf("Minute left entered lot    (0-60)?\n\n");
   scanf("%d", minTimeOut);
 }
 
+//Function definitions
 void calcParkingTime(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int *hoursParked, int *minutesParked, int *parkedTime)
 {
   if (minTimeIn > minTimeOut)
@@ -62,7 +66,7 @@ void calcParkingTime(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, i
   if (*minutesParked > 0)
     (*hoursParked)++;
 
-  *parkedTime = *hoursParked;
+  *parkedTime = *hoursParked;//rounding up hours
 }
 
 float calcParkingFare(char vehType, int parkedTime)
@@ -72,14 +76,14 @@ float calcParkingFare(char vehType, int parkedTime)
   switch (vehType)
   {
   case 'C':
-    if (parkedTime < 3)
+    if (parkedTime < 3) //3hours
       fare = 0.00;
     else
       fare = parkedTime * 1.50;
     break;
 
   case 'T':
-    if (parkedTime < 2)
+    if (parkedTime < 2) 
       fare = 1.00;
     else
       fare = parkedTime * 2.30;
@@ -102,7 +106,7 @@ float calcParkingFare(char vehType, int parkedTime)
 
 void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int minTimeOut, int hoursParked, int minutesParked, float fare, int parkedTime)
 {
-  printf("\t\tPARKING LOT CHARGE\t\t\n");
+  printf("\tPARKING LOT CHARGE\t\n");
   printf("\nType of vehicle: %c", vehType);
   printf("\nTIME-IN:               %2d : %2d", hrTimeIn, minTimeIn);
   printf("\nTIME-out:              %2d : %2d", hrTimeOut, minTimeOut);
@@ -111,5 +115,5 @@ void printCharge(char vehType, int hrTimeIn, int minTimeIn, int hrTimeOut, int m
   printf("\nROUNDED TOTAL               %2d", parkedTime);
   printf("\n                      --------");
   printf("\nTOTAL CHARGE             $%.2f", fare);
-  printf("\n");
+  printf("\n\n");
 }
